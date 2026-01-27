@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FSY Event 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-200 via-blue-100 to-white min-h-screen flex flex-col justify-center items-center">
+
+    <!-- Hero Section -->
+    <section class="text-center px-6 py-20">
+        <h1 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4">
+            Welcome to FSY 2026
+        </h1>
+        <h2 class="text-2xl md:text-3xl text-blue-600 mb-6">
+            Cebu City, Cebu Central, and Bogo
+        </h2>
+        <p class="text-gray-700 text-lg md:text-xl mb-8">
+            Strengthening youth through faith, friends, and fun.
+        </p>
+        
+        <a href="{% url 'participants:login' %}" 
+           class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+            👉 Participant Login
+        </a>
+    </section>
+
+    <!-- Optional Footer -->
+    <footer class="mt-auto text-gray-500 py-6 text-center">
+        &copy; 2026 FSY Cebu Event. All rights reserved.
+    </footer>
+
+</body>
+</html>

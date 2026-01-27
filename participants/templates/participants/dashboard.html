@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My FSY Status</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center py-10">
+
+    <!-- Header -->
+    <header class="w-full max-w-4xl mb-8">
+        <div class="flex justify-between items-center bg-white shadow-md rounded-lg p-6">
+            <h1 class="text-2xl font-bold text-blue-700">FSY Participant Dashboard</h1>
+            <a href="{% url 'participants:logout' %}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition">
+                Logout
+            </a>
+        </div>
+    </header>
+
+    <!-- Welcome card -->
+    <section class="w-full max-w-4xl mb-6">
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-xl font-semibold mb-2">
+                Hello, {{ participant.preferred_name|default:participant.first_name }}!
+            </h2>
+            <ul class="space-y-2 text-gray-700">
+                <li><strong>Full Name:</strong> {{ participant.first_name }} {{ participant.last_name }}</li>
+                <li><strong>Email:</strong> {{ participant.email }}</li>
+                <li><strong>Ward / Branch:</strong> {{ participant.ward_branch }}</li>
+                <li><strong>Stake / District / Mission:</strong> {{ participant.stake_district_mission }}</li>
+                <li><strong>Status:</strong> {{ participant.application_type}}</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Assignments card -->
+    <section class="w-full max-w-4xl mb-6">
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-2 text-blue-600">Assignments</h3>
+            <p class="mb-1"><strong>Group:</strong> {{ participant.group|default:"To be assigned" }}</p>
+            <p><strong>Room:</strong> {{ participant.room|default:"To be assigned" }}</p>
+        </div>
+    </section>
+
+    <!-- Important info card -->
+    <section class="w-full max-w-4xl">
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-2 text-blue-600">Important Info</h3>
+            <p class="mb-1"><strong>Dietary:</strong> {{ participant.dietary_info|default:"None" }}</p>
+            <p><strong>Medical:</strong> {{ participant.medical_info|default:"None" }}</p>
+        </div>
+    </section>
+
+</body>
+</html>
