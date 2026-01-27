@@ -1,0 +1,27 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$870000$CNBN0N3MXCBjok44aO5a7g$Y3Pxwl9RWo/vzdaURO3ygjeh6Gjjgg+zgoLGgUVfrDk=",
+    "last_login": "2026-01-27T03:13:41.483Z",
+    "is_superuser": true,
+    "username": "jhunz",
+    "first_name": "",
+    "last_name": "",
+    "email": "eyewebmaster@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-01-27T03:13:30.666Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "4lfwtcbc40ax8aj5tbgvzkis0444qgs0",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2pDWgsO4dN8zkGEYpGogKe3KeHfbpAvd_vfefytP65L92mT2U1RX1avT7xaIn1J2EB9U7lVzLcs8Bb0r-qBNjzXK63a4fweZWt5qYIZARtKZEBLAJRpGK2hZHBAIp25IQcR1hEzWMgYLweBGekQ3qM8XF3E49A:1vkZWP:Room31nQZA_nYb4uyqFLxiZA1bN-qEcuc5m6LAO0iDw",
+    "expire_date": "2026-02-10T03:13:41.571Z"
+  }
+}
+]
