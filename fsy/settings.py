@@ -1,9 +1,9 @@
-from pathlib import Path
-import dj_database_url
-from decouple import config
 import os
+from pathlib import Path
+from decouple import config
 from dotenv import load_dotenv
 
+# import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,7 +17,8 @@ SECRET_KEY = 'django-insecure-7$#h=#e$!$_przj-r$o&)s!l9skm50e_@%&y+@4!%w@xpwjhp%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost',
+    '127.0.0.1', 'fsy-2026.vercel.app']
 
 
 # Application definition
