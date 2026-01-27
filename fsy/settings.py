@@ -1,5 +1,6 @@
 from pathlib import Path
 import dj_database_url
+from decouple import config
 import os
 from dotenv import load_dotenv
 
@@ -16,7 +17,7 @@ SECRET_KEY = 'django-insecure-7$#h=#e$!$_przj-r$o&)s!l9skm50e_@%&y+@4!%w@xpwjhp%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['vercel.app']
+ALLOWED_HOSTS = ['vercel.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -74,14 +75,18 @@ import sys
 is_migrating = 'migrate' in sys.argv or 'makemigrations' in sys.argv
 
 # Pick the URL based on the command
-db_url = os.environ.get('DIRECT_DATABASE_URL') if is_migrating else os.environ.get('DATABASE_URL')
+db_url = os.environ.get('DIRECT_DATABASE_URL') if is_migrating else os.environ.get('DB_URL')
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=db_url,
-        conn_max_age=0,  # Always 0 when using a pooler
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_DATABASE'),
+        'USER': config('DB_USER'),
+        'HOST': config('DB_HOST'),
+        'PASSWORD': config('DB_PASSWORD'),
+        #'PORT': config('DB_PORT'),
+        
+    }
 }
 
 # CRITICAL for Supabase Pooler (Transaction Mode)
