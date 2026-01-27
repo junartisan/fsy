@@ -6,7 +6,10 @@ chardet==5.2.0
 charset-normalizer==3.4.4
 click==8.3.1
 cookiecutter==2.6.0
+<<<<<<< HEAD
 dj-database-url==3.1.0
+=======
+>>>>>>> f16c9893ddcdbf7046a876c52995e7a59631459c
 Django==5.1
 django-browser-reload==1.21.0
 django-tailwind==4.4.2
@@ -15,11 +18,17 @@ Jinja2==3.1.6
 markdown-it-py==4.0.0
 MarkupSafe==3.0.3
 mdurl==0.1.2
+<<<<<<< HEAD
 psycopg2-binary==2.9.11
 Pygments==2.19.2
 pytailwindcss==0.3.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.1
+=======
+Pygments==2.19.2
+pytailwindcss==0.3.0
+python-dateutil==2.9.0.post0
+>>>>>>> f16c9893ddcdbf7046a876c52995e7a59631459c
 python-slugify==8.0.4
 PyYAML==6.0.3
 requests==2.32.5
