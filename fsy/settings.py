@@ -98,6 +98,11 @@ if not is_migrating:
     DATABASES["default"]["DISABLE_SERVER_SIDE_CURSORS"] = True
 
 
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 # Password validation
