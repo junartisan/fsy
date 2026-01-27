@@ -3,22 +3,20 @@
     {
       "src": "fsy/wsgi.py",
       "use": "@vercel/python",
-      "config" : {
-          "maxLamddaSize": "15mb",
-          "runtime": "python3.11",
-          "buildCommand": "bash setup.sh",
-
+      "config": {
+        "runtime": "python3.11",
+        "maxLambdaSize": "15mb"
       }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "fsy/wsgi.py"
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
     },
     {
-      "src": "static/(.*)",
-      "dest": "/static/$1"
+      "src": "/(.*)",
+      "dest": "fsy/wsgi.py"
     }
   ]
 }
