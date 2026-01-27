@@ -15,10 +15,12 @@ Jinja2==3.1.6
 markdown-it-py==4.0.0
 MarkupSafe==3.0.3
 mdurl==0.1.2
+psycopg2==2.9.11
 psycopg2-binary==2.9.11
 Pygments==2.19.2
 pytailwindcss==0.3.0
 python-dateutil==2.9.0.post0
+python-decouple==3.8
 python-dotenv==1.2.1
 python-slugify==8.0.4
 PyYAML==6.0.3
