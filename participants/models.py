@@ -11,7 +11,7 @@ class Participant(models.Model):
     birthday = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=20)
     application_type = models.CharField(max_length=100)
-<<<<<<< HEAD
+
     phone = models.CharField(max_length=25)
 
     guardian_name = models.CharField(max_length=150, blank=True)
@@ -21,7 +21,7 @@ class Participant(models.Model):
     emergency_contact_name = models.CharField(max_length=150, blank=True)
     emergency_contact_email = models.EmailField(blank=True)
     emergency_contact_phone = models.CharField(max_length=25, blank=True)
-=======
+
     phone = models.CharField(max_length=20)
 
     guardian_name = models.CharField(max_length=150, blank=True)
@@ -31,7 +31,7 @@ class Participant(models.Model):
     emergency_contact_name = models.CharField(max_length=150, blank=True)
     emergency_contact_email = models.EmailField(blank=True)
     emergency_contact_phone = models.CharField(max_length=20, blank=True)
->>>>>>> f16c9893ddcdbf7046a876c52995e7a59631459c
+
 
     stake_district_mission = models.CharField(max_length=200)
     ward_branch = models.CharField(max_length=200)
@@ -39,11 +39,10 @@ class Participant(models.Model):
 
     medical_info = models.TextField(blank=True)
     dietary_info = models.TextField(blank=True)
-<<<<<<< HEAD
+
     requires_attention = models.CharField(max_length=250, blank=True)
-=======
     requires_attention = models.CharField(max_length=50, blank=True)
->>>>>>> f16c9893ddcdbf7046a876c52995e7a59631459c
+
 
     tshirt_size = models.CharField(max_length=10, blank=True)
     agreed_terms_text = models.TextField(blank=True)
