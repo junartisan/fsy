@@ -6,6 +6,8 @@
       "config" : {
           "maxLamddaSize": "15mb",
           "runtime": "python3.11",
+          "buildCommand": "bash setup.sh",
+
       }
     }
   ],
@@ -13,6 +15,10 @@
     {
       "src": "/(.*)",
       "dest": "fsy/wsgi.py"
+    },
+    {
+      "src": "static/(.*)",
+      "dest": "/static/$1"
     }
   ]
 }
