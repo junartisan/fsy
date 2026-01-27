@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from decouple import config
 from dotenv import load_dotenv
+import dj_database_url
 
 # import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -76,23 +77,25 @@ import sys
 is_migrating = 'migrate' in sys.argv or 'makemigrations' in sys.argv
 
 # Pick the URL based on the command
-db_url = os.environ.get('DIRECT_DATABASE_URL') if is_migrating else os.environ.get('DB_URL')
+
+db_url = os.environ.get(
+    "DIRECT_DATABASE_URL" if is_migrating else "DB_URL"
+)
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_DATABASE'),
-        'USER': config('DB_USER'),
-        'HOST': config('DB_HOST'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'PORT': config('DB_PORT'),
-        
-    }
+    "default": dj_database_url.parse(
+        db_url,
+        conn_max_age=0,
+        ssl_require=True,
+    )
 }
 
 # CRITICAL for Supabase Pooler (Transaction Mode)
 if not is_migrating:
-    DATABASES['default']['DISABLE_SERVER_SIDE_CURSORS'] = True
+    DATABASES["default"]["DISABLE_SERVER_SIDE_CURSORS"] = True
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
