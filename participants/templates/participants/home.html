@@ -24,6 +24,31 @@
             👉 Participant Login
         </a>
     </section>
+    <section class="text-center px-6 py-20">
+        <h1 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4">
+            FSY 2026 Upcoming Events 
+        </h1>
+        
+        {% if events %}
+            {% for event in events %}
+                <div class="event">
+                    <h2 class="text-3xl md:text-3xl font-extralight">{{ event.title }}</h2>
+                    <p class="md:text-2xl">
+                        📅 {{ event.start_date|date:"M d, Y h:i A" }}
+                        {% if event.end_date %}
+                            – {{ event.end_date|date:"M d, Y h:i A" }}
+                        {% endif %}
+                    </p>
+                    <p class="md:text-2xl">📍 {{ event.location }}</p>
+                    <p>{{ event.description }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No upcoming events.</p>
+        {% endif %}
+
+
+    </section>
 
     <!-- Optional Footer -->
     <footer class="mt-auto text-gray-500 py-6 text-center">

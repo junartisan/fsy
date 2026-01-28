@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
+    'events',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -73,6 +74,7 @@ WSGI_APPLICATION = 'fsy.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+
 load_dotenv()
 
 # Check if we are running a migration command
@@ -147,6 +149,10 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 
 # Default primary key field type

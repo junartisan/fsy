@@ -9,29 +9,18 @@ class Participant(models.Model):
     preferred_name = models.CharField(max_length=100, blank=True)
 
     birthday = models.DateField(null=True, blank=True)
-    gender = models.CharField(max_length=20)
+    gender = models.CharField(max_length=22)
     application_type = models.CharField(max_length=100)
 
-    phone = models.CharField(max_length=25)
+    phone = models.CharField(max_length=30)
 
     guardian_name = models.CharField(max_length=150, blank=True)
     guardian_email = models.EmailField(blank=True)
-    guardian_phone = models.CharField(max_length=25, blank=True)
+    guardian_phone = models.CharField(max_length=30, blank=True)
 
     emergency_contact_name = models.CharField(max_length=150, blank=True)
     emergency_contact_email = models.EmailField(blank=True)
-    emergency_contact_phone = models.CharField(max_length=25, blank=True)
-
-    phone = models.CharField(max_length=20)
-
-    guardian_name = models.CharField(max_length=150, blank=True)
-    guardian_email = models.EmailField(blank=True)
-    guardian_phone = models.CharField(max_length=20, blank=True)
-
-    emergency_contact_name = models.CharField(max_length=150, blank=True)
-    emergency_contact_email = models.EmailField(blank=True)
-    emergency_contact_phone = models.CharField(max_length=20, blank=True)
-
+    emergency_contact_phone = models.CharField(max_length=30, blank=True)
 
     stake_district_mission = models.CharField(max_length=200)
     ward_branch = models.CharField(max_length=200)
@@ -41,12 +30,9 @@ class Participant(models.Model):
     dietary_info = models.TextField(blank=True)
 
     requires_attention = models.CharField(max_length=250, blank=True)
-    requires_attention = models.CharField(max_length=50, blank=True)
-
 
     tshirt_size = models.CharField(max_length=10, blank=True)
     agreed_terms_text = models.TextField(blank=True)
-
 
     group = models.CharField(
         max_length=50,

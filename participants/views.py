@@ -3,6 +3,8 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
+from events.models import Event
+from django.utils import timezone
 
 from .models import Participant
 from .forms import ParticipantLoginForm
@@ -10,8 +12,14 @@ from .forms import ParticipantLoginForm
 
 # FRONT PAGE
 def home(request):
-    return render(request, "participants/home.html")
+    events = Event.objects.filter(
+        is_published=True,
+        start_date__gte=timezone.now()
+    ).order_by('start_date')
 
+    return render(request, "participants/home.html", {
+        "events": events
+    })
 
 # LOGIN
 def participant_login(request):
@@ -74,3 +82,11 @@ def participant_logout(request):
     logout(request)
     request.session.flush()
     return redirect("participants:home")
+
+
+@login_required
+def participants_dashboard(request):
+    participant = request.user.participant
+    return render(request, "participants/dashboard.html", { 
+        "participant": participant
+    })
