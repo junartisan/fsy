@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.utils import timezone
 from .forms import ParticipantRegistrationForm, ParticipantLoginForm
@@ -85,3 +85,33 @@ def participant_logout(request):
     
     # Send them back to the home page
     return redirect("participants:home")
+
+
+
+def participant_edit(request):
+
+    # 1. Check if the session 'key' exists
+    participant_id = request.session.get("participant_id")
+    
+    if not participant_id:
+        messages.error(request, "Access denied. Please log in first.")
+        return redirect("participants:login")
+
+    # Fetch the existing participant record
+    participant = get_object_or_404(Participant, id=participant_id)
+
+    if request.method == "POST":
+        # Pass the 'instance' so Django knows to UPDATE instead of CREATE
+        form = ParticipantRegistrationForm(request.POST, instance=participant)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your profile has been updated successfully!")
+            return redirect("participants:dashboard")
+    else:
+        # Pre-fill the form with existing data
+        form = ParticipantRegistrationForm(instance=participant)
+
+    return render(request, "participants/register.html", {
+        "form": form,
+        "is_edit": True  # Helps us change the button text in the HTML
+    })

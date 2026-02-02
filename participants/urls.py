@@ -9,4 +9,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'), # Called via participants:dashboard
     path('logout/', views.participant_logout, name='logout'),
     path('register/', views.participant_register, name='register'), # Changed 'participant_register' to 'register' for simplicity
+    path('edit-profile/', views.participant_edit, name='participant_edit'),
 ]
