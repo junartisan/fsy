@@ -1,6 +1,11 @@
 from django.db import models
 
 class Participant(models.Model):
+    STAKE_CHOICES = [
+        ("cebu_city_stake", "Cebu City Stake"),
+        ("cebu_central_stake", "Cebu Central Stake"),
+        ("bogo_district", "Bogo District"),
+    ]
     timestamp = models.DateTimeField(null=True, blank=True)
 
     email = models.EmailField(unique=True)
@@ -22,7 +27,10 @@ class Participant(models.Model):
     emergency_contact_email = models.EmailField(blank=True)
     emergency_contact_phone = models.CharField(max_length=30, blank=True)
 
-    stake_district_mission = models.CharField(max_length=200)
+    stake_district_mission = models.CharField(
+        max_length=50, 
+        choices=STAKE_CHOICES
+    )
     ward_branch = models.CharField(max_length=200)
     bishop = models.CharField(max_length=150, blank=True)
 

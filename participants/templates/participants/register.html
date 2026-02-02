@@ -1,0 +1,156 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSY 2026 Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-white to-blue-50 min-h-screen py-10">
+
+<div class="max-w-5xl mx-auto px-4" 
+     x-data="{ 
+        tab: 'personal',
+        init() {
+            if (document.querySelector('.tab-church-err')) this.tab = 'church';
+            else if (document.querySelector('.tab-guardian-err')) this.tab = 'guardian';
+            else if (document.querySelector('.tab-medical-err')) this.tab = 'medical';
+            else if (document.querySelector('.tab-personal-err')) this.tab = 'personal';
+        }
+     }">
+
+    <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-blue-800 mb-2">FSY 2026 Registration</h1>
+        <p class="text-gray-600 text-lg">Cebu City • Cebu Central • Bogo District</p>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="mb-6 p-4 rounded-lg text-center shadow-sm
+                {% if message.tags == 'success' %}
+                    bg-green-100 text-green-700 border border-green-300
+                {% else %}
+                    bg-red-100 text-red-700 border border-red-300
+                {% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-gray-100">
+
+        <div class="flex border-b border-gray-200 mb-6 overflow-x-auto whitespace-nowrap">
+            <button type="button" :class="tab=='personal'? 'border-b-2 border-blue-600 font-semibold text-blue-700' : 'text-gray-500 hover:text-blue-500'"
+                    class="px-4 py-2 mr-2 transition-colors focus:outline-none" @click="tab='personal'">Personal Info</button>
+            <button type="button" :class="tab=='church'? 'border-b-2 border-blue-600 font-semibold text-blue-700' : 'text-gray-500 hover:text-blue-500'"
+                    class="px-4 py-2 mr-2 transition-colors focus:outline-none" @click="tab='church'">Church Info</button>
+            <button type="button" :class="tab=='guardian'? 'border-b-2 border-blue-600 font-semibold text-blue-700' : 'text-gray-500 hover:text-blue-500'"
+                    class="px-4 py-2 mr-2 transition-colors focus:outline-none" @click="tab='guardian'">Guardian</button>
+            <button type="button" :class="tab=='medical'? 'border-b-2 border-blue-600 font-semibold text-blue-700' : 'text-gray-500 hover:text-blue-500'"
+                    class="px-4 py-2 transition-colors focus:outline-none" @click="tab='medical'">Medical</button>
+        </div>
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <div x-show="tab === 'personal'" x-cloak class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {% for field in form %}
+                    {% if field.name in "email first_name last_name preferred_name birthday gender phone application_type" %}
+                        <div class="{% if field.errors %}tab-personal-err{% endif %}">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">{{ field.label }}</label>
+                            {{ field|add_class:"w-full border rounded-lg p-2 focus:ring focus:ring-blue-400 outline-none transition-all" }}
+                            {% if field.errors %}
+                                <p class="text-red-600 text-xs mt-1">{{ field.errors|striptags }}</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div x-show="tab === 'church'" x-cloak class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {% for field in form %}
+                    {% if field.name in "stake_district_mission ward_branch bishop" %}
+                        <div class="{% if field.errors %}tab-church-err{% endif %}">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">{{ field.label }}</label>
+                            {{ field|add_class:"w-full border rounded-lg p-2 focus:ring focus:ring-blue-400 outline-none" }}
+                            {% if field.errors %}
+                                <p class="text-red-600 text-xs mt-1">{{ field.errors|striptags }}</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div x-show="tab === 'guardian'" x-cloak class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {% for field in form %}
+                    {% if field.name in "guardian_name guardian_email guardian_phone emergency_contact_name emergency_contact_email emergency_contact_phone" %}
+                        <div class="{% if field.errors %}tab-guardian-err{% endif %}">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">{{ field.label }}</label>
+                            {{ field|add_class:"w-full border rounded-lg p-2 focus:ring focus:ring-blue-400 outline-none" }}
+                            {% if field.errors %}
+                                <p class="text-red-600 text-xs mt-1">{{ field.errors|striptags }}</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div x-show="tab === 'medical'" x-cloak class="grid grid-cols-1 gap-5">
+                {% for field in form %}
+                    {% if field.name in "medical_info dietary_info tshirt_size requires_attention" %}
+                        <div class="{% if field.errors %}tab-medical-err{% endif %}">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">{{ field.label }}</label>
+                            {{ field|add_class:"w-full border rounded-lg p-2 focus:ring focus:ring-blue-400 outline-none" }}
+                            {% if field.errors %}
+                                <p class="text-red-600 text-xs mt-1">{{ field.errors|striptags }}</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="border-t border-gray-100 pt-6 mt-6 space-y-4">
+                {% if form.agreed_terms_text %}
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ form.agreed_terms_text.label }}</label>
+                    {{ form.agreed_terms_text|add_class:"w-full border rounded-lg p-2 bg-gray-50 text-sm outline-none" }}
+                </div>
+                {% endif %}
+
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        {{ form.agree_to_terms|add_class:"h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer" }}
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="{{ form.agree_to_terms.id_for_label }}" class="font-medium text-gray-800 cursor-pointer">
+                            I agree to the Terms and Conditions
+                        </label>
+                        {% if form.agree_to_terms.errors %}
+                            <p class="text-red-600 text-xs mt-1 font-bold">{{ form.agree_to_terms.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4">
+                <button type="submit"
+                        class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800
+                        text-white font-bold py-4 rounded-xl transition-all shadow-lg transform hover:-translate-y-0.5 active:scale-95">
+                    ✅ Submit Registration
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="text-center text-gray-500 text-sm mt-8">
+        &copy; 2026 FSY Cebu Event
+    </div>
+</div>
+
+</body>
+</html>
