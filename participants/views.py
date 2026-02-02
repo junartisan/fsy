@@ -22,40 +22,27 @@ def home(request):
     })
 
 # LOGIN
+
 def participant_login(request):
-    form = ParticipantLoginForm(request.POST or None)
+    if request.method == "POST":
+        last_name = request.POST.get("last_name")
+        year = request.POST.get("year")
 
-    if request.method == "POST" and form.is_valid():
-        email = form.cleaned_data["email"].lower()
+        participant = Participant.objects.filter(
+            last_name__iexact=last_name,
+            birthday__year=year
+        ).first()
 
-        try:
-            participant = Participant.objects.get(email__iexact=email)
-        except Participant.DoesNotExist:
-            messages.error(
-                request,
-                "❌ Email not found. Please use the email you registered for FSY."
-            )
-            return render(request, "participants/login.html", {"form": form})
+        if participant:
+            messages.success(request, "Participant found!")
+            return render(request, "participants/dashboard.html", {
+                "participant": participant
+            })
+        else:
+            messages.error(request, "No matching participant found.")
 
-        # Create or update Django user
-        user, created = User.objects.get_or_create(
-            username=email,
-            defaults={"email": email}
-        )
-
-        if not user.email:
-            user.email = email
-            user.save()
-
-        login(request, user)
-
-        request.session["participant_id"] = participant.id
-
-        return redirect("participants:dashboard")
-
-    return render(request, "participants/login.html", {"form": form})
-
-
+    return render(request, "participants/login.html")
+    
 # DASHBOARD
 @login_required
 def dashboard(request):
